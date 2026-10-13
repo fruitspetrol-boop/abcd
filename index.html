@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space</title>
+<style>
+:root{--cyan:#8be9ff;--gold:#ffdc8a;--glass:rgba(3,9,29,.76)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#02040d;color:#f4f7ff;font-family:Arial,Helvetica,sans-serif}body{overflow-x:hidden}
+/* Animated cosmic GIF-style frame around the whole website */
+#space-gif-border{position:fixed;inset:0;z-index:20;pointer-events:none;border:clamp(5px,0.8vw,11px) solid transparent;border-image:linear-gradient(135deg,#38e8ff,#8a5cff,#ff55c8,#ffcf5a,#38e8ff) 1;animation:borderHue 7s linear infinite;filter:drop-shadow(0 0 5px #4ceaffaa)}
+#space-gif-border:before,#space-gif-border:after{content:"✦  ·  ✧  ·  ✦  ·  ✧  ·  ✦  ·  ✧  ·  ✦";position:absolute;left:0;right:0;height:12px;overflow:hidden;white-space:nowrap;text-align:center;font-size:clamp(10px,1.4vw,16px);letter-spacing:clamp(5px,2vw,25px);color:#a9f7ff;text-shadow:0 0 6px #2ddfff,0 0 15px #8d57ff;animation:sparkleDrift 4s ease-in-out infinite alternate}
+#space-gif-border:before{top:-7px}#space-gif-border:after{bottom:-7px;transform:rotate(180deg);animation-delay:-2s}
+@keyframes borderHue{0%{filter:hue-rotate(0deg) drop-shadow(0 0 5px #4ceaffaa)}100%{filter:hue-rotate(360deg) drop-shadow(0 0 8px #d35cffaa)}}
+@keyframes sparkleDrift{from{opacity:.55;text-shadow:0 0 5px #2ddfff}to{opacity:1;text-shadow:0 0 9px #fff,0 0 18px #9b5dff}}
+@media(prefers-reduced-motion:reduce){#space-gif-border,#space-gif-border:before,#space-gif-border:after{animation:none}}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.solar-system{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:1;isolation:isolate}
+.sun{position:absolute;width:clamp(75px,10vw,150px);height:clamp(75px,10vw,150px);left:50%;top:48%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff9c8 0,#ffc85a 18%,#ff7b27 48%,#a82d20 72%,transparent 74%);box-shadow:0 0 45px #ff8a32,0 0 110px #ff5e3a66,0 0 190px #f49b3440}
+.orbit{position:absolute;left:50%;top:48%;border:1px solid rgba(150,193,255,.32);border-radius:50%;transform:translate(-50%,-50%) rotate(-17deg);box-shadow:0 0 18px #4c8fff0b}
+.orbit .planet{position:absolute;left:50%;top:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 14px currentColor}
+.o1{width:clamp(150px,19vw,270px);height:clamp(100px,12vw,175px);animation:orbit1 10s linear infinite}.o1 .planet{width:9px;height:9px;background:#a9dfff;color:#64bfff}
+.o2{width:clamp(230px,31vw,440px);height:clamp(155px,20vw,285px);animation:orbit2 19s linear infinite}.o2 .planet{width:15px;height:15px;background:radial-gradient(circle at 30% 25%,#ffe9b2,#d58a43 60%,#7b3c36);color:#e4a65a}
+.o3{width:clamp(315px,44vw,620px);height:clamp(210px,29vw,420px);animation:orbit3 28s linear infinite}.o3 .planet{width:20px;height:20px;background:radial-gradient(circle at 30% 25%,#c4f4ff,#357fd7 62%,#142b78);color:#54bfff;box-shadow:0 0 18px #54bfff,0 0 34px #54bfff88}
+.o4{width:clamp(410px,58vw,820px);height:clamp(275px,39vw,550px);animation:orbit4 40s linear infinite}.o4 .planet{width:13px;height:13px;background:radial-gradient(circle at 30% 25%,#ffc6a5,#e0523c 70%);color:#fa7b60}
+.o5{width:clamp(500px,72vw,1020px);height:clamp(335px,48vw,680px);animation:orbit5 56s linear infinite}.o5 .planet:after{content:"";position:absolute;width:42px;height:13px;left:50%;top:50%;border:2px solid #f5d78bbd;border-radius:50%;transform:translate(-50%,-50%) rotate(-22deg)}.o5 .planet{width:28px;height:28px;background:radial-gradient(circle at 30% 25%,#fff1c1,#d5a34d 60%,#8e5a30);color:#ffd36d;box-shadow:0 0 20px #ffd36d,0 0 38px #ffd36d77}
+@keyframes orbit1{to{transform:translate(-50%,-50%) rotate(343deg)}}@keyframes orbit2{to{transform:translate(-50%,-50%) rotate(343deg)}}@keyframes orbit3{to{transform:translate(-50%,-50%) rotate(343deg)}}@keyframes orbit4{to{transform:translate(-50%,-50%) rotate(343deg)}}@keyframes orbit5{to{transform:translate(-50%,-50%) rotate(343deg)}}
+.nebula{position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 15% 20%,#5332a52b,transparent 32%),radial-gradient(ellipse at 85% 30%,#0878a62b,transparent 30%),radial-gradient(ellipse at 75% 80%,#8a23712a,transparent 35%);filter:blur(24px);animation:nebula 25s ease-in-out infinite alternate}@keyframes nebula{to{transform:translate(-2%,3%) scale(1.08)}}
+main{position:relative;z-index:1;width:min(1120px,100%);margin:auto;padding:18px 16px 26px}
+header{text-align:center;margin:0 auto 6px;max-width:850px;text-shadow:0 0 22px #529bff66}header .eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--cyan)}header h1{font-size:clamp(27px,4.5vw,54px);letter-spacing:.04em;margin:12px 0 9px;font-weight:750}header p{color:#c6d7fa;line-height:1.6;margin:0;font-size:clamp(13px,1.5vw,16px)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch}.panel{background:var(--glass);border:1px solid #83baff4d;border-radius:20px;overflow:hidden;backdrop-filter:blur(13px);box-shadow:0 18px 65px #0007,inset 0 0 28px #6ca8ff0a}.video-panel{display:flex;align-items:center;justify-content:center;min-height:150px;padding:10px}.video-panel video{display:block;width:86%;height:auto;min-height:0;max-height:24vh;object-fit:contain;background:#02030a;border-radius:10px}
+.message-panel{padding:clamp(14px,1.8vw,22px);display:flex;align-items:center;justify-content:center;position:relative}.message-panel:before{content:"";position:absolute;inset:12px;border:1px solid #8ce7ff48;border-radius:13px;pointer-events:none}.message{max-width:620px;text-align:center;position:relative}.star-mark{color:var(--gold);font-size:23px;letter-spacing:9px;margin-bottom:17px}.message h2{font-size:clamp(17px,2.1vw,25px);line-height:1.4;letter-spacing:.08em;color:#a9eaff;margin:0 0 19px}.message p{font-family:Georgia,"Noto Serif Devanagari",serif;color:#f6e9cb;font-size:clamp(13px,1.1vw,15px);line-height:1.65;margin:0}.end-mark{color:var(--gold);font-size:22px;margin-top:20px}
+.bottom{display:flex;align-items:stretch;justify-content:space-between;gap:14px;margin-top:14px}.rocket-gif-panel{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;padding:8px}.rocket-gif-panel img{display:block;width:100%;height:auto;max-height:220px;object-fit:contain;border-radius:12px}
+.quote-strip{padding:22px 26px;display:flex;align-items:center;justify-content:center;text-align:center;color:#d5e5ff;line-height:1.8;font-size:14px}.quote-strip strong{color:var(--cyan);font-weight:600} .illusion-windows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}.illusion-window{height:clamp(125px,18vw,205px);padding:0;position:relative;overflow:hidden;border-radius:16px;background:#02030b;border:1px solid #7fe8ff66;box-shadow:0 0 22px #6b4dff2b,inset 0 0 24px #1f8aff22}.illusion-window canvas{display:block;width:100%;height:100%}.illusion-window:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid #ffffff16;border-radius:inherit;box-shadow:inset 0 0 20px #50cfff20}
+@media(max-width:850px){main{padding:16px 11px 25px}.layout{grid-template-columns:1fr}.video-panel{min-height:140px}.video-panel video{width:78%;max-height:22vh}.message-panel{min-height:0}.bottom{flex-direction:column;align-items:stretch}.rocket-gif-panel{width:100%}.rocket-gif-panel img{max-height:180px}.illusion-windows{grid-template-columns:1fr 1fr}.illusion-window:last-child{grid-column:1 / -1;height:150px}}
+@media(max-width:500px){.message-panel{padding:18px}.message p{font-size:14px}.video-panel{min-height:120px;padding:6px}.video-panel video{width:82%;max-height:20vh}.solar-system{opacity:.82}.orbit{border-color:rgba(150,193,255,.25)}.illusion-windows{grid-template-columns:1fr}.illusion-window,.illusion-window:last-child{height:145px;grid-column:auto}}
+</style></head>
+<body>
+<div id="space-gif-border" aria-hidden="true"></div><canvas id="stars" aria-hidden="true"></canvas><div class="nebula" aria-hidden="true"></div>
+<div class="solar-system" aria-hidden="true"><div class="sun"></div><div class="orbit o1"><i class="planet"></i></div><div class="orbit o2"><i class="planet"></i></div><div class="orbit o3"><i class="planet"></i></div><div class="orbit o4"><i class="planet"></i></div><div class="orbit o5"><i class="planet"></i></div></div>
+<main>
+
+<section class="layout">
+  <div class="panel video-panel"><video controls muted playsinline preload="metadata"><source src="space-video.mp4" type="video/mp4">Your browser cannot play this video. Keep space-video.mp4 beside index.html.</video></div>
+  <article class="panel message-panel"><div class="message" lang="mr"><p>या विशाल विश्वात आपणच एकमेव सजीव नाही. या अनंत ब्रह्मांडात कुठेतरी परग्रहवासी अस्तित्वात असण्याची शक्यता आहे. देवभक्तीच्या नावाखाली निष्क्रिय राहण्याऐवजी मानवाने ज्ञान, विज्ञान आणि संशोधनाचा मार्ग स्वीकारला पाहिजे. मानवजातीचे एक महान ध्येय असावे—अंतराळातील जीवनाचा शोध घेणे आणि एक दिवस त्यांच्याशी संपर्क साधणे. विश्वातील इतर जीवसृष्टीचा शोध हाच आपल्या जिज्ञासेचा सर्वोच्च प्रवास असावा.</p></div></article>
+</section>
+<section class="bottom"><div class="panel rocket-gif-panel"><img src="rocket_to_alien.gif" alt="Animated rocket travels from Earth to another planet and an astronaut shakes hands with an alien"></div></section>
+<section class="illusion-windows" aria-label="Animated optical illusions">
+  <div class="panel illusion-window"><canvas id="illusion-spiral" aria-hidden="true"></canvas></div>
+  <div class="panel illusion-window"><canvas id="illusion-tunnel" aria-hidden="true"></canvas></div>
+  <div class="panel illusion-window"><canvas id="illusion-rings" aria-hidden="true"></canvas></div>
+</section>
+
+</main>
+<script>
+(()=>{
+// Starfield behind the animated planetary system.
+const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');let W,H,D,stars=[];
+function resize(){D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;canvas.width=W*D;canvas.height=H*D;ctx.setTransform(D,0,0,D,0,0);stars=Array.from({length:Math.min(700,Math.max(220,Math.floor(W*H/1700)))},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.25,s:Math.random()*.6+.12,p:Math.random()*6.28,c:['#fff','#a8ddff','#d5baff'][Math.floor(Math.random()*3)]}));}
+function draw(t){ctx.clearRect(0,0,W,H);for(const s of stars){s.y+=s.s;if(s.y>H)s.y=0;ctx.globalAlpha=.35+.65*(.5+.5*Math.sin(t*.001+s.p));ctx.fillStyle=s.c;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;requestAnimationFrame(draw)}addEventListener('resize',resize);resize();requestAnimationFrame(draw);
+
+// Three continuously animated optical-illusion windows, intentionally without labels or text.
+const illusionCanvases=['illusion-spiral','illusion-tunnel','illusion-rings'].map(id=>document.getElementById(id));
+function setupIllusions(){
+  for(const c of illusionCanvases){const d=Math.min(devicePixelRatio||1,2),r=c.getBoundingClientRect();c.width=Math.max(1,Math.floor(r.width*d));c.height=Math.max(1,Math.floor(r.height*d));const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);}
+}
+function spiral(c,t){const x=c.getContext('2d'),w=c.clientWidth,h=c.clientHeight,cx=w/2,cy=h/2,max=Math.hypot(w,h)*.65;x.clearRect(0,0,w,h);x.fillStyle='#030711';x.fillRect(0,0,w,h);x.save();x.translate(cx,cy);for(let i=0;i<260;i++){let a=i*.19+t*.00055,r=i*max/260;let px=Math.cos(a)*r,py=Math.sin(a)*r; x.fillStyle=`hsl(${(i*3+t*.04)%360} 95% 62%)`;x.globalAlpha=.9;x.beginPath();x.arc(px,py,1.2+(i/260)*2.1,0,Math.PI*2);x.fill()}x.globalAlpha=1;x.restore();}
+function tunnel(c,t){const x=c.getContext('2d'),w=c.clientWidth,h=c.clientHeight,cx=w/2,cy=h/2;x.clearRect(0,0,w,h);x.fillStyle='#02030b';x.fillRect(0,0,w,h);const n=26;for(let i=n;i>0;i--){const phase=((i*13+t*.045)%n)/n;const r=phase*Math.max(w,h)*.8+2; x.beginPath();x.ellipse(cx,cy,r,r*.57,Math.sin(t*.0003)*.12,0,Math.PI*2);x.lineWidth=2.2;x.strokeStyle=`hsl(${190+i*7+t*.03} 100% ${40+phase*35}%)`;x.globalAlpha=.38+phase*.6;x.stroke()}x.globalAlpha=1;}
+function rings(c,t){const x=c.getContext('2d'),w=c.clientWidth,h=c.clientHeight,cx=w/2,cy=h/2;x.clearRect(0,0,w,h);x.fillStyle='#030611';x.fillRect(0,0,w,h);const max=Math.max(w,h)*.75;for(let i=0;i<18;i++){const r=max*(i+1)/18,offset=(i%2?1:-1)*Math.sin(t*.0012+i*.35)*5;x.beginPath();x.arc(cx,cy,r+offset,0,Math.PI*2);x.lineWidth=2.5;x.strokeStyle=i%2?'#48f0ff':'#f85dff';x.globalAlpha=.35+.55*(.5+.5*Math.sin(t*.002+i*.7));x.stroke()}x.globalAlpha=1;for(let y=0;y<h;y+=12){x.strokeStyle='rgba(255,255,255,.08)';x.beginPath();x.moveTo(0,y+Math.sin(t*.001+y*.1)*3);x.lineTo(w,y+Math.sin(t*.001+y*.1)*3);x.stroke()}}
+function animateIllusions(t){spiral(illusionCanvases[0],t);tunnel(illusionCanvases[1],t);rings(illusionCanvases[2],t);requestAnimationFrame(animateIllusions)}
+addEventListener('resize',setupIllusions);setupIllusions();requestAnimationFrame(animateIllusions);
+
+})();
+</script></body></html>
